@@ -1,0 +1,51 @@
+<!-- <input type="text" id="box">
+<button>CLICK ME</button>
+<div id="map-canvas"></div>
+
+<script>
+
+$(document).ready(function(){
+
+  $('button').on('click', function(event){
+    var address = $('#box').val();
+    $('#box').val('');
+
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address + '&sensor=true_or_false').done(function(data) {
+
+      console.log(data);
+      var lat = data.results[0].geometry.location.lat
+      var lng = data.results[0].geometry.location.lng
+
+      var mapOptions = {
+        center: new google.maps.LatLng(lat,lng),
+        zoom: 10
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+
+      var location = lat+','+lng;
+
+      $.ajax({
+      url: 'https://api.locu.com/v1_0/venue/search/?location='+location+'&api_key=f815931c5f8a392ecc053ff0b2e81ec1240da520',
+      dataType: 'jsonp',
+      success: function(data){
+
+        $.each(data.objects, function(index, item){
+
+          var lat = item.lat;
+          var lng = item.long;
+          var loc = new google.maps.LatLng(lat, lng);
+          console.log(loc);
+          var newMarker = new google.maps.Marker({
+            position: loc,
+            map: map
+          });
+        });
+
+          }
+      });
+    });
+  });
+});
+//
+</script> -->

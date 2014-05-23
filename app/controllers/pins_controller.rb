@@ -1,4 +1,5 @@
 class PinsController < ApplicationController
+   before_action :authenticate_user!
   def index
      @pins = Pin.all
 
@@ -8,11 +9,11 @@ class PinsController < ApplicationController
   end
 
   def new
-
   end
 
   def create
     @pin = Pin.new(pin_params)
+    @pin.name = current_user.email
     respond_to do |format|
       if @pin.save
         format.json { render json: @pin, status: :created}
